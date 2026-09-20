@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Sangamam 2026 — Regalia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #150c1b;
+            --panel: #221130;
+            --panel-2: #2c1522;
+            --gold: #d4af37;
+            --gold-soft: #e9cf7d;
+            --ivory: #f3e9d0;
+            --muted: #b7a0c7;
+            --line: rgba(212, 175, 55, 0.35);
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px);
+        }
+
+        * {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100%;
+            background:
+                radial-gradient(ellipse at 50% 0%, #2c1a3a 0%, var(--bg) 55%),
+                var(--bg);
+            color: var(--ivory);
+            font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+            font-size: 19px;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 44px 24px 100px;
+        }
+
+        /* ---- Header / crest ---- */
+        .crest {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        .crest svg {
+            width: 52px;
+            height: 52px;
+        }
+
+        h1.title {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: clamp(28px, 6vw, 40px);
+            letter-spacing: 0.06em;
+            text-align: center;
+            margin: 0;
+            color: var(--gold-soft);
+            text-shadow: 0 0 18px rgba(212, 175, 55, 0.25);
+        }
+
+        p.theme {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            letter-spacing: 0.35em;
+            font-size: 13px;
+            color: var(--muted);
+            margin: 10px 0 0;
+            padding-left: 0.35em;
+            /* optical balance for letter-spacing */
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 30px 0 36px;
+            color: var(--gold);
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: linear-gradient(90deg, transparent, var(--line), transparent);
+        }
+
+        .divider svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ---- Spotlight ---- */
+        .spotlight {
+            position: relative;
+            background: linear-gradient(165deg, var(--panel), var(--panel-2));
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 40px 28px 32px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .spotlight::before {
+            content: "";
+            position: absolute;
+            inset: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            border-radius: 3px;
+            pointer-events: none;
+        }
+
+        .spot-rank {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 0.25em;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .spot-name {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: clamp(24px, 5.5vw, 34px);
+            color: var(--ivory);
+            margin: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .spot-points {
+            font-size: clamp(48px, 12vw, 68px);
+            font-weight: 600;
+            color: var(--gold-soft);
+            margin: 14px 0 4px;
+            line-height: 1;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .spot-points-label {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            color: var(--muted);
+        }
+
+        .fade-swap {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 26px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.25);
+            transition: background 0.4s ease, transform 0.4s ease;
+        }
+
+        .dot.active {
+            background: var(--gold);
+            transform: scale(1.3);
+        }
+
+        /* ---- Standings ---- */
+        .standings {
+            margin-top: 44px;
+        }
+
+        .standings h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            letter-spacing: 0.2em;
+            color: var(--muted);
+            text-align: center;
+            margin: 0 0 18px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        tr {
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        tr:last-child {
+            border-bottom: none;
+        }
+
+        td {
+            padding: 13px 6px;
+        }
+
+        td.rank {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            width: 34px;
+            font-size: 15px;
+        }
+
+        td.name {
+            font-size: 21px;
+            color: var(--ivory);
+        }
+
+        td.pts {
+            text-align: right;
+            font-size: 21px;
+            color: var(--gold-soft);
+            font-weight: 600;
+        }
+
+        tr.leader td.name,
+        tr.leader td.pts {
+            color: var(--gold-soft);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+        }
+
+        /* ---- Admin trigger ---- */
+        .admin-fab {
+            position: fixed;
+            right: max(18px, env(safe-area-inset-right, 0px));
+            bottom: max(18px, env(safe-area-inset-bottom, 0px));
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.55;
+            transition: opacity 0.2s ease;
+        }
+
+        .admin-fab:hover {
+            opacity: 1;
+        }
+
+        .admin-fab svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ---- Modal ---- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 5, 14, 0.72);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 28px 24px;
+            max-width: 420px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            letter-spacing: 0.1em;
+            color: var(--gold-soft);
+            margin: 0 0 18px;
+            text-align: center;
+        }
+
+        .field {
+            margin-bottom: 14px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 5px;
+            letter-spacing: 0.04em;
+        }
+
+        .field input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            color: var(--ivory);
+            padding: 9px 11px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+        }
+
+        .field input:focus {
+            outline: 2px solid var(--gold);
+            outline-offset: 1px;
+        }
+
+        .row-pair {
+            display: flex;
+            gap: 10px;
+        }
+
+        .row-pair .field {
+            flex: 1;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button.btn {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            letter-spacing: 0.12em;
+            padding: 11px 16px;
+            border-radius: 4px;
+            border: 1px solid var(--line);
+            background: transparent;
+            color: var(--gold-soft);
+            cursor: pointer;
+            flex: 1;
+        }
+
+        button.btn.primary {
+            background: var(--gold);
+            color: #241531;
+            border-color: var(--gold);
+        }
+
+        button.btn:hover {
+            opacity: 0.85;
+        }
+
+        .modal-error {
+            color: #e0879a;
+            font-size: 14px;
+            margin-top: 4px;
+            min-height: 18px;
+        }
+
+        .hint {
+            font-size: 13px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        @media (max-width: 420px) {
+            .wrap {
+                padding: 32px 16px 90px;
+            }
+
+            td.name,
+            td.pts {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <div class="crest">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 46L14 20L24 32L32 14L40 32L50 20L56 46H8Z" stroke="#d4af37" stroke-width="2.2"
+                    stroke-linejoin="round" />
+                <circle cx="14" cy="16" r="2.4" fill="#d4af37" />
+                <circle cx="32" cy="10" r="2.6" fill="#d4af37" />
+                <circle cx="50" cy="16" r="2.4" fill="#d4af37" />
+                <line x1="8" y1="50" x2="56" y2="50" stroke="#d4af37" stroke-width="2.2" />
+            </svg>
+        </div>
+        <h1 class="title">Sangamam 2026</h1>
+        <p class="theme">REGALIA</p>
+
+        <div class="divider">
+            <svg viewBox="0 0 24 24" fill="#d4af37">
+                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" />
+            </svg>
+        </div>
+
+        <div class="spotlight">
+            <div class="spot-rank" id="spotRank">CURRENT STANDING</div>
+            <h2 class="spot-name" id="spotName">—</h2>
+            <div class="spot-points" id="spotPoints">0</div>
+            <div class="spot-points-label">POINTS</div>
+            <div class="dots" id="dots"></div>
+        </div>
+
+        <div class="standings">
+            <h2>Full Points Table</h2>
+            <table id="standingsTable">
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <footer>House of Points &mdash; updated live by the scorekeeper</footer>
+    </div>
+
+    <div class="admin-fab" id="adminFab" title="Scorekeeper access">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 46L15 24L24 34L32 18L40 34L49 24L54 46H10Z" stroke="#d4af37" stroke-width="3"
+                stroke-linejoin="round" />
+        </svg>
+    </div>
+
+    <div class="modal-backdrop" id="passModal">
+        <div class="modal">
+            <h3>SCOREKEEPER ACCESS</h3>
+            <div class="field">
+                <label for="passInput">Passcode</label>
+                <input type="password" id="passInput" autocomplete="off">
+            </div>
+            <div class="modal-error" id="passError"></div>
+            <div class="modal-actions">
+                <button class="btn" id="passCancel">Cancel</button>
+                <button class="btn primary" id="passSubmit">Enter</button>
+            </div>
+            <p class="hint">Ask the event organiser for the passcode.</p>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="editModal">
+        <div class="modal">
+            <h3>UPDATE SCORES</h3>
+            <div id="editFields"></div>
+            <div class="modal-actions">
+                <button class="btn" id="editCancel">Close</button>
+                <button class="btn primary" id="editSave">Save Scores</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ---- Configuration ----
+        // Change this passcode to whatever you want the scorekeeper to use.
+        const SCOREKEEPER_PASSCODE = "regalia2026";
+        const STORAGE_KEY = "sangamam2026_scores";
+        const ROTATE_MS = 4500;
+
+        const defaultTeams = [
+            { name: "Team Aurelia", points: 0 },
+            { name: "Team Solstice", points: 0 },
+            { name: "Team Meridian", points: 0 },
+            { name: "Team Empyrean", points: 0 },
+            { name: "Team Valorent", points: 0 }
+        ];
+
+        function loadTeamsLocal() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed) && parsed.length === 5) return parsed;
+                }
+            } catch (e) { }
+            return defaultTeams.slice();
+        }
+
+        function saveTeamsLocal(teams) {
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(teams)); } catch (e) { }
+        }
+
+        let teams = loadTeamsLocal();
+        let spotlightIndex = 0;
+        let rotateTimer = null;
+        let fbScoresRef = null;   // set once Firebase connects; null = local-only mode
+
+        // ---- Firebase Realtime Database (shared, cross-device) ----
+        // Fill in FIREBASE_CONFIG below with your own project's values
+        // (see README.md). Until you do, the app just runs in local-only
+        // mode on whichever device has it open.
+        const FIREBASE_CONFIG = {
+            apiKey: "AIzaSyA8TJVNitEipVGere5P0y53oTqv9-Yqu8U",
+            authDomain: "sangamam-2026-35eb2.firebaseapp.com",
+            databaseURL: "https://sangamam-2026-35eb2-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "sangamam-2026-35eb2",
+            storageBucket: "sangamam-2026-35eb2.firebasestorage.app",
+            messagingSenderId: "906914523182",
+            appId: "1:906914523182:web:ce6aaf3b43253289b757bf"
+        };
+
+        async function connectSharedStore() {
+            if (FIREBASE_CONFIG.apiKey === "PASTE_YOUR_API_KEY") {
+                console.warn("Sangamam scoreboard: Firebase not configured yet — running in local-only mode. See README.md.");
+                return;
+            }
+            try {
+                const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+                const { getDatabase, ref, onValue, set } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
+
+                const app = initializeApp(FIREBASE_CONFIG);
+                const db = getDatabase(app);
+                const scoresRef = ref(db, "sangamam2026/scores");
+
+                onValue(scoresRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if (data && Array.isArray(data.teams) && data.teams.length === 5) {
+                        teams = data.teams;
+                        renderAll();
+                    } else {
+                        // Nothing stored yet — seed it once with whatever this device shows.
+                        set(scoresRef, { teams: teams }).catch(() => { });
+                    }
+                });
+
+                fbScoresRef = { set, ref: scoresRef };
+            } catch (e) {
+                console.warn("Sangamam scoreboard: could not connect to Firebase, staying local-only.", e);
+            }
+        }
+        connectSharedStore();
+
+        async function saveTeams(updated) {
+            teams = updated;
+            saveTeamsLocal(updated);
+            if (fbScoresRef) {
+                try { await fbScoresRef.set(fbScoresRef.ref, { teams: updated }); } catch (e) { }
+            }
+        }
+
+        const spotName = document.getElementById('spotName');
+        const spotPoints = document.getElementById('spotPoints');
+        const spotRank = document.getElementById('spotRank');
+        const dotsEl = document.getElementById('dots');
+        const standingsBody = document.querySelector('#standingsTable tbody');
+
+        function rankedTeams() {
+            return teams
+                .map((t, i) => ({ ...t, originalIndex: i }))
+                .sort((a, b) => b.points - a.points);
+        }
+
+        function ordinal(n) {
+            const s = ["th", "st", "nd", "rd"], v = n % 100;
+            return n + (s[(v - 20) % 10] || s[v] || s[0]);
+        }
+
+        function renderStandings() {
+            const ranked = rankedTeams();
+            standingsBody.innerHTML = '';
+            ranked.forEach((t, i) => {
+                const tr = document.createElement('tr');
+                if (i === 0 && t.points > 0) tr.classList.add('leader');
+                tr.innerHTML =
+                    '<td class="rank">' + (i + 1) + '</td>' +
+                    '<td class="name">' + escapeHtml(t.name) + '</td>' +
+                    '<td class="pts">' + t.points + '</td>';
+                standingsBody.appendChild(tr);
+            });
+        }
+
+        function renderDots() {
+            dotsEl.innerHTML = '';
+            teams.forEach((_, i) => {
+                const d = document.createElement('div');
+                d.className = 'dot' + (i === spotlightIndex ? ' active' : '');
+                dotsEl.appendChild(d);
+            });
+        }
+
+        function renderSpotlight() {
+            const ranked = rankedTeams();
+            const current = ranked[spotlightIndex];
+            spotName.classList.add('fade-swap');
+            spotPoints.classList.add('fade-swap');
+            setTimeout(() => {
+                spotRank.textContent = ordinal(spotlightIndex + 1) + ' PLACE';
+                spotName.textContent = current.name;
+                spotPoints.textContent = current.points;
+                spotName.classList.remove('fade-swap');
+                spotPoints.classList.remove('fade-swap');
+            }, 180);
+            renderDots();
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function startRotation() {
+            if (rotateTimer) clearInterval(rotateTimer);
+            rotateTimer = setInterval(() => {
+                spotlightIndex = (spotlightIndex + 1) % teams.length;
+                renderSpotlight();
+            }, ROTATE_MS);
+        }
+
+        function renderAll() {
+            renderStandings();
+            renderSpotlight();
+        }
+
+        renderAll();
+        startRotation();
+
+        // ---- Admin flow ----
+        const adminFab = document.getElementById('adminFab');
+        const passModal = document.getElementById('passModal');
+        const passInput = document.getElementById('passInput');
+        const passError = document.getElementById('passError');
+        const passSubmit = document.getElementById('passSubmit');
+        const passCancel = document.getElementById('passCancel');
+
+        const editModal = document.getElementById('editModal');
+        const editFields = document.getElementById('editFields');
+        const editSave = document.getElementById('editSave');
+        const editCancel = document.getElementById('editCancel');
+
+        adminFab.addEventListener('click', () => {
+            passError.textContent = '';
+            passInput.value = '';
+            passModal.classList.add('open');
+            setTimeout(() => passInput.focus(), 50);
+        });
+
+        passCancel.addEventListener('click', () => passModal.classList.remove('open'));
+
+        function tryPasscode() {
+            if (passInput.value === SCOREKEEPER_PASSCODE) {
+                passModal.classList.remove('open');
+                openEditModal();
+            } else {
+                passError.textContent = 'Incorrect passcode. Try again.';
+            }
+        }
+        passSubmit.addEventListener('click', tryPasscode);
+        passInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryPasscode(); });
+
+        function openEditModal() {
+            editFields.innerHTML = '';
+            teams.forEach((t, i) => {
+                const row = document.createElement('div');
+                row.className = 'row-pair';
+                row.innerHTML =
+                    '<div class="field"><label>Team ' + (i + 1) + ' name</label>' +
+                    '<input type="text" data-idx="' + i + '" data-kind="name" value="' + escapeHtml(t.name) + '"></div>' +
+                    '<div class="field" style="max-width:110px"><label>Points</label>' +
+                    '<input type="number" data-idx="' + i + '" data-kind="points" value="' + t.points + '"></div>';
+                editFields.appendChild(row);
+            });
+        }
+
+        editCancel.addEventListener('click', () => editModal.classList.remove('open'));
+
+        editSave.addEventListener('click', async () => {
+            const inputs = editFields.querySelectorAll('input');
+            const updated = teams.map(t => ({ ...t }));
+            inputs.forEach(inp => {
+                const idx = parseInt(inp.getAttribute('data-idx'), 10);
+                const kind = inp.getAttribute('data-kind');
+                if (kind === 'name') {
+                    updated[idx].name = inp.value.trim() || ('Team ' + (idx + 1));
+                } else {
+                    const n = parseInt(inp.value, 10);
+                    updated[idx].points = isNaN(n) ? 0 : n;
+                }
+            });
+            editSave.textContent = 'Saving…';
+            editSave.disabled = true;
+            await saveTeams(updated);
+            spotlightIndex = 0;
+            renderAll();
+            editSave.textContent = 'Save Scores';
+            editSave.disabled = false;
+            editModal.classList.remove('open');
+        });
+
+        // Reveal edit modal right after a successful passcode entry
+        function openEditModalWrapper() { editModal.classList.add('open'); }
+        const _origOpen = openEditModal;
+        openEditModal = function () { _origOpen(); openEditModalWrapper(); };
+    </script>
+
+</body>
+
+</html>
