@@ -403,6 +403,177 @@
                 font-size: 18px;
             }
         }
+
+        /* ---- Big screen / projector mode ----
+     The scoreboard is meant to be watched from across a room, so on
+     wide viewports (a laptop mirrored to a TV, a projector, etc.) it
+     scales up well beyond normal webpage sizes rather than sitting
+     small in the middle of the screen. */
+        @media (min-width: 900px) {
+            .wrap {
+                max-width: 860px;
+                padding: 56px 40px 110px;
+            }
+
+            .crest svg {
+                width: 68px;
+                height: 68px;
+            }
+
+            h1.title {
+                font-size: clamp(42px, 4.5vw, 58px);
+            }
+
+            p.theme {
+                font-size: 17px;
+                letter-spacing: 0.4em;
+            }
+
+            .divider svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .divider {
+                margin: 40px 0 46px;
+            }
+
+            .spotlight {
+                padding: 56px 48px 46px;
+            }
+
+            .spot-rank {
+                font-size: 15px;
+                margin-bottom: 24px;
+            }
+
+            .spot-name {
+                font-size: clamp(34px, 3.5vw, 48px);
+            }
+
+            .spot-points {
+                font-size: clamp(84px, 9vw, 124px);
+                margin: 18px 0 6px;
+            }
+
+            .spot-points-label {
+                font-size: 14px;
+                letter-spacing: 0.35em;
+            }
+
+            .dots {
+                gap: 14px;
+                margin-top: 32px;
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .standings {
+                margin-top: 56px;
+            }
+
+            .standings h2 {
+                font-size: 19px;
+                margin-bottom: 22px;
+            }
+
+            td {
+                padding: 17px 10px;
+            }
+
+            td.rank {
+                font-size: 19px;
+                width: 44px;
+            }
+
+            td.name,
+            td.pts {
+                font-size: 27px;
+            }
+
+            footer {
+                font-size: 16px;
+                margin-top: 50px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .wrap {
+                max-width: 1120px;
+                padding: 72px 56px 130px;
+            }
+
+            .crest svg {
+                width: 84px;
+                height: 84px;
+            }
+
+            h1.title {
+                font-size: clamp(58px, 4vw, 84px);
+            }
+
+            p.theme {
+                font-size: 20px;
+                letter-spacing: 0.45em;
+            }
+
+            .spotlight {
+                padding: 72px 64px 56px;
+            }
+
+            .spot-rank {
+                font-size: 17px;
+                margin-bottom: 28px;
+            }
+
+            .spot-name {
+                font-size: clamp(46px, 3vw, 66px);
+            }
+
+            .spot-points {
+                font-size: clamp(120px, 8vw, 172px);
+                margin: 22px 0 8px;
+            }
+
+            .spot-points-label {
+                font-size: 16px;
+            }
+
+            .dots {
+                gap: 18px;
+                margin-top: 38px;
+            }
+
+            .dot {
+                width: 12px;
+                height: 12px;
+            }
+
+            .standings h2 {
+                font-size: 22px;
+            }
+
+            td {
+                padding: 20px 12px;
+            }
+
+            td.rank {
+                font-size: 22px;
+                width: 52px;
+            }
+
+            td.name,
+            td.pts {
+                font-size: 32px;
+            }
+
+            footer {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 
