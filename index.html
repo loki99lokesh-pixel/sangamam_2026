@@ -13,6 +13,7 @@
     <style>
         :root {
             --bg: #150c1b;
+            --bg-glow: #2c1a3a;
             --panel: #221130;
             --panel-2: #2c1522;
             --gold: #d4af37;
@@ -37,7 +38,7 @@
             margin: 0;
             min-height: 100%;
             background:
-                radial-gradient(ellipse at 50% 0%, #2c1a3a 0%, var(--bg) 55%),
+                radial-gradient(ellipse at 50% 0%, var(--bg-glow) 0%, var(--bg) 55%),
                 var(--bg);
             color: var(--ivory);
             font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -77,12 +78,14 @@
 
         p.theme {
             font-family: 'Cinzel', serif;
+            font-weight: 600;
             text-align: center;
-            letter-spacing: 0.35em;
-            font-size: 13px;
-            color: var(--muted);
-            margin: 10px 0 0;
-            padding-left: 0.35em;
+            letter-spacing: 0.32em;
+            font-size: 22px;
+            color: var(--gold-soft);
+            text-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+            margin: 14px 0 0;
+            padding-left: 0.32em;
             /* optical balance for letter-spacing */
         }
 
@@ -130,7 +133,7 @@
 
         .spot-rank {
             font-family: 'Cinzel', serif;
-            font-size: 12px;
+            font-size: 16px;
             letter-spacing: 0.25em;
             color: var(--muted);
             margin-bottom: 18px;
@@ -146,7 +149,7 @@
         }
 
         .spot-points {
-            font-size: clamp(48px, 12vw, 68px);
+            font-size: clamp(58px, 15vw, 84px);
             font-weight: 600;
             color: var(--gold-soft);
             margin: 14px 0 4px;
@@ -193,11 +196,11 @@
 
         .standings h2 {
             font-family: 'Cinzel', serif;
-            font-size: 15px;
+            font-size: 16px;
             letter-spacing: 0.2em;
             color: var(--muted);
             text-align: center;
-            margin: 0 0 18px;
+            margin: 0 0 20px;
             font-weight: 600;
         }
 
@@ -215,24 +218,24 @@
         }
 
         td {
-            padding: 13px 6px;
+            padding: 16px 8px;
         }
 
         td.rank {
             font-family: 'Cinzel', serif;
             color: var(--gold);
-            width: 34px;
-            font-size: 15px;
+            width: 38px;
+            font-size: 17px;
         }
 
         td.name {
-            font-size: 21px;
+            font-size: 24px;
             color: var(--ivory);
         }
 
         td.pts {
             text-align: right;
-            font-size: 21px;
+            font-size: 24px;
             color: var(--gold-soft);
             font-weight: 600;
         }
@@ -400,19 +403,40 @@
 
             td.name,
             td.pts {
-                font-size: 18px;
+                font-size: 20px;
             }
         }
 
         /* ---- Big screen / projector mode ----
      The scoreboard is meant to be watched from across a room, so on
-     wide viewports (a laptop mirrored to a TV, a projector, etc.) it
-     scales up well beyond normal webpage sizes rather than sitting
-     small in the middle of the screen. */
+     wide viewports (a laptop mirrored to a TV, a projector, etc.):
+     - colors lift a bit (the near-black base reads muddy from a
+       distance on a big panel)
+     - the spotlight section is sized to fill exactly one screen, so
+       on a normal 16:9 TV/projector only the live cycling score is
+       visible without scrolling — the full points table sits just
+       below it for anyone who does scroll (e.g. checking on a laptop) */
         @media (min-width: 900px) {
+            :root {
+                --bg: #241531;
+                --bg-glow: #402a4d;
+                --panel: #34203f;
+                --panel-2: #3d2436;
+                --muted: #c6b0d6;
+                --line: rgba(212, 175, 55, 0.4);
+            }
+
             .wrap {
                 max-width: 860px;
                 padding: 56px 40px 110px;
+            }
+
+            .hero {
+                min-height: calc(100vh - 56px);
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
 
             .crest svg {
@@ -425,8 +449,10 @@
             }
 
             p.theme {
-                font-size: 17px;
-                letter-spacing: 0.4em;
+                font-size: 38px;
+                letter-spacing: 0.3em;
+                padding-left: 0.3em;
+                margin-top: 18px;
             }
 
             .divider svg {
@@ -443,7 +469,7 @@
             }
 
             .spot-rank {
-                font-size: 15px;
+                font-size: 19px;
                 margin-bottom: 24px;
             }
 
@@ -452,7 +478,7 @@
             }
 
             .spot-points {
-                font-size: clamp(84px, 9vw, 124px);
+                font-size: clamp(100px, 11vw, 150px);
                 margin: 18px 0 6px;
             }
 
@@ -476,22 +502,22 @@
             }
 
             .standings h2 {
-                font-size: 19px;
-                margin-bottom: 22px;
+                font-size: 20px;
+                margin-bottom: 24px;
             }
 
             td {
-                padding: 17px 10px;
+                padding: 20px 12px;
             }
 
             td.rank {
-                font-size: 19px;
-                width: 44px;
+                font-size: 21px;
+                width: 46px;
             }
 
             td.name,
             td.pts {
-                font-size: 27px;
+                font-size: 30px;
             }
 
             footer {
@@ -501,9 +527,22 @@
         }
 
         @media (min-width: 1400px) {
+            :root {
+                --bg: #2b1a3a;
+                --bg-glow: #4d3159;
+                --panel: #3c2349;
+                --panel-2: #45283e;
+                --muted: #cfbcdd;
+                --line: rgba(212, 175, 55, 0.45);
+            }
+
             .wrap {
                 max-width: 1120px;
                 padding: 72px 56px 130px;
+            }
+
+            .hero {
+                min-height: calc(100vh - 72px);
             }
 
             .crest svg {
@@ -516,8 +555,10 @@
             }
 
             p.theme {
-                font-size: 20px;
-                letter-spacing: 0.45em;
+                font-size: 54px;
+                letter-spacing: 0.32em;
+                padding-left: 0.32em;
+                margin-top: 22px;
             }
 
             .spotlight {
@@ -525,7 +566,7 @@
             }
 
             .spot-rank {
-                font-size: 17px;
+                font-size: 22px;
                 margin-bottom: 28px;
             }
 
@@ -534,7 +575,7 @@
             }
 
             .spot-points {
-                font-size: clamp(120px, 8vw, 172px);
+                font-size: clamp(140px, 10vw, 200px);
                 margin: 22px 0 8px;
             }
 
@@ -553,21 +594,21 @@
             }
 
             .standings h2 {
-                font-size: 22px;
+                font-size: 24px;
             }
 
             td {
-                padding: 20px 12px;
+                padding: 24px 14px;
             }
 
             td.rank {
-                font-size: 22px;
-                width: 52px;
+                font-size: 24px;
+                width: 56px;
             }
 
             td.name,
             td.pts {
-                font-size: 32px;
+                font-size: 36px;
             }
 
             footer {
@@ -580,31 +621,33 @@
 <body>
 
     <div class="wrap">
-        <div class="crest">
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 46L14 20L24 32L32 14L40 32L50 20L56 46H8Z" stroke="#d4af37" stroke-width="2.2"
-                    stroke-linejoin="round" />
-                <circle cx="14" cy="16" r="2.4" fill="#d4af37" />
-                <circle cx="32" cy="10" r="2.6" fill="#d4af37" />
-                <circle cx="50" cy="16" r="2.4" fill="#d4af37" />
-                <line x1="8" y1="50" x2="56" y2="50" stroke="#d4af37" stroke-width="2.2" />
-            </svg>
-        </div>
-        <h1 class="title">Sangamam 2026</h1>
-        <p class="theme">REGALIA</p>
+        <div class="hero">
+            <div class="crest">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 46L14 20L24 32L32 14L40 32L50 20L56 46H8Z" stroke="#d4af37" stroke-width="2.2"
+                        stroke-linejoin="round" />
+                    <circle cx="14" cy="16" r="2.4" fill="#d4af37" />
+                    <circle cx="32" cy="10" r="2.6" fill="#d4af37" />
+                    <circle cx="50" cy="16" r="2.4" fill="#d4af37" />
+                    <line x1="8" y1="50" x2="56" y2="50" stroke="#d4af37" stroke-width="2.2" />
+                </svg>
+            </div>
+            <h1 class="title">Sangamam 2026</h1>
+            <p class="theme">REGALIA</p>
 
-        <div class="divider">
-            <svg viewBox="0 0 24 24" fill="#d4af37">
-                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" />
-            </svg>
-        </div>
+            <div class="divider">
+                <svg viewBox="0 0 24 24" fill="#d4af37">
+                    <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" />
+                </svg>
+            </div>
 
-        <div class="spotlight">
-            <div class="spot-rank" id="spotRank">CURRENT STANDING</div>
-            <h2 class="spot-name" id="spotName">—</h2>
-            <div class="spot-points" id="spotPoints">0</div>
-            <div class="spot-points-label">POINTS</div>
-            <div class="dots" id="dots"></div>
+            <div class="spotlight">
+                <div class="spot-rank" id="spotRank">CURRENT STANDING</div>
+                <h2 class="spot-name" id="spotName">—</h2>
+                <div class="spot-points" id="spotPoints">0</div>
+                <div class="spot-points-label">POINTS</div>
+                <div class="dots" id="dots"></div>
+            </div>
         </div>
 
         <div class="standings">
