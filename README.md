@@ -1,4 +1,4 @@
-# Sangamam 2026 — Regalia Points Table
+# Sayonara 2027 — Regalia Points Table
 
 A single static page: a public scoreboard that auto-cycles through 5 teams,
 plus a passcode-gated panel for the scorekeeper to update points. Scores sync
@@ -8,7 +8,7 @@ Database (free tier).
 ## 1. Create a Firebase project (~5 minutes)
 
 1. Go to https://console.firebase.google.com and click **Add project**
-   (any name is fine, e.g. "sangamam-2026").
+   (any name is fine, e.g. "sayonara-2027").
 2. You can skip Google Analytics when asked.
 3. Once the project opens, in the left sidebar go to **Build → Realtime
    Database**, click **Create Database**, choose any region, and start in
@@ -23,9 +23,9 @@ Database (free tier).
    ```js
    const firebaseConfig = {
      apiKey: "AIza...",
-     authDomain: "sangamam-2026.firebaseapp.com",
-     databaseURL: "https://sangamam-2026-default-rtdb.firebaseio.com",
-     projectId: "sangamam-2026",
+     authDomain: "sayonara-2027.firebaseapp.com",
+     databaseURL: "https://sayonara-2027-default-rtdb.firebaseio.com",
+     projectId: "sayonara-2027",
      ...
    };
    ```
@@ -56,12 +56,55 @@ icon in the bottom-right corner.
 ## 4. Using it
 
 - **Passcode:** set in `index.html`, search for `SCOREKEEPER_PASSCODE`
-  (defaults to `regalia2026`). Change it to whatever you like before
+  (defaults to `regalia2027`). Change it to whatever you like before
   deploying.
 - **Team names & starting points:** editable from the scorekeeper panel
   itself once the site is live — no need to edit code for this.
 - If Firebase isn't configured yet (step 2 skipped), the page still works,
   it just won't sync across devices — each device keeps its own scores.
+
+## Adding your event logo (optional)
+
+Same idea as the video: the page already has a spot for it.
+
+1. In the `assets` folder (same one as the background video, if you're
+   using that), add your logo as `logo.png`.
+2. A transparent-background PNG or SVG looks best against the dark
+   theme — if your logo has a white or solid box background, ask
+   whoever made it for a transparent version, or say so here and it
+   can likely be worked around.
+3. No code changes needed. It'll appear centered at the top of the
+   page, in place of the crown emblem. If it's missing, that spot just
+   stays empty — nothing breaks.
+
+If you'd rather have it placed somewhere else (e.g. next to the
+title), let me know and I'll move it.
+
+## Adding a background video (optional)
+
+The page already has the plumbing for a looping background video — you
+just need to add the file:
+
+1. Create a folder called `assets` next to `index.html`.
+2. Put your video file in it, named exactly `background.mp4`.
+   (Optional: also add a still frame named `background-poster.jpg` in
+   the same folder — it shows for a split second while the video loads.)
+3. That's it — no code changes needed. If the file isn't there, the
+   page just falls back to the plain background, so it's safe to try.
+
+A few practical notes:
+- Keep the video **muted** content-wise — the tag is already set to
+  autoplay muted and on loop, which is required for autoplay to work
+  on phones and most browsers anyway.
+- Compress it before adding — aim for well under ~20 MB (1080p,
+  H.264 `.mp4`) so it loads quickly on the display device. Handbrake
+  (free) is a good tool for this if the raw file is large.
+- There's a dark tinted layer over the video by default so the gold
+  text stays readable. Once you've picked a video, send it over (or
+  describe it) and the tint/color palette can be adjusted to match.
+- If you'd rather use a GIF, that works too but tends to be a much
+  larger file for the same length of motion — a compressed `.mp4` is
+  usually the better choice for a full-screen background.
 
 ## Locking it down further (optional)
 
