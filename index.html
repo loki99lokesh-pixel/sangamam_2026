@@ -53,16 +53,14 @@
             padding: 44px 24px 100px;
         }
 
-        /* ---- Header / crest ---- */
-        .crest {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 14px;
-        }
-
-        .crest svg {
-            width: 52px;
-            height: 52px;
+        /* ---- Header / logo ---- */
+        .event-logo {
+            display: block;
+            max-width: 130px;
+            max-height: 130px;
+            width: auto;
+            height: auto;
+            margin: 0 auto 18px;
         }
 
         h1.title {
@@ -73,7 +71,7 @@
             text-align: center;
             margin: 0;
             color: var(--gold-soft);
-            text-shadow: 0 0 18px rgba(212, 175, 55, 0.25);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85), 0 0 24px rgba(212, 175, 55, 0.4);
         }
 
         p.theme {
@@ -83,7 +81,7 @@
             letter-spacing: 0.32em;
             font-size: 22px;
             color: var(--gold-soft);
-            text-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85), 0 0 20px rgba(212, 175, 55, 0.4);
             margin: 14px 0 0;
             padding-left: 0.32em;
             /* optical balance for letter-spacing */
@@ -114,20 +112,27 @@
         /* ---- Spotlight ---- */
         .spotlight {
             position: relative;
-            background: linear-gradient(165deg, var(--panel), var(--panel-2));
-            border: 1px solid var(--line);
-            border-radius: 6px;
+            background: linear-gradient(145deg, rgba(28, 14, 42, 0.62), rgba(15, 6, 25, 0.75));
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border: 1px solid rgba(212, 175, 55, 0.38);
+            border-radius: 12px;
             padding: 40px 28px 32px;
             text-align: center;
             overflow: hidden;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(212, 175, 55, 0.12),
+                inset 0 1px 1px rgba(255, 235, 175, 0.2),
+                inset 0 0 30px rgba(212, 175, 55, 0.05);
         }
 
         .spotlight::before {
             content: "";
             position: absolute;
             inset: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.18);
-            border-radius: 3px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 8px;
             pointer-events: none;
         }
 
@@ -192,6 +197,13 @@
         /* ---- Standings ---- */
         .standings {
             margin-top: 44px;
+            background: rgba(22, 10, 32, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 12px;
+            padding: 28px 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
 
         .standings h2 {
@@ -439,9 +451,10 @@
                 justify-content: center;
             }
 
-            .crest svg {
-                width: 68px;
-                height: 68px;
+            .event-logo {
+                max-width: 180px;
+                max-height: 180px;
+                margin-bottom: 22px;
             }
 
             h1.title {
@@ -545,9 +558,10 @@
                 min-height: calc(100vh - 72px);
             }
 
-            .crest svg {
-                width: 84px;
-                height: 84px;
+            .event-logo {
+                max-width: 230px;
+                max-height: 230px;
+                margin-bottom: 26px;
             }
 
             h1.title {
@@ -615,23 +629,43 @@
                 font-size: 18px;
             }
         }
+
+        /* ---- Background video ---- */
+        .bg-video {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(1.35) contrast(1.08);
+        }
+
+        .bg-scrim {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(16, 8, 24, 0.30), rgba(16, 8, 24, 0.45));
+            z-index: -1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bg-video {
+                display: none;
+            }
+        }
     </style>
 </head>
 
 <body>
 
+    <video class="bg-video" autoplay muted loop playsinline webkit-playsinline poster="assets/background-poster.jpg">
+        <source src="assets/background.mp4" type="video/mp4">
+    </video>
+    <div class="bg-scrim"></div>
+
     <div class="wrap">
         <div class="hero">
-            <div class="crest">
-                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 46L14 20L24 32L32 14L40 32L50 20L56 46H8Z" stroke="#d4af37" stroke-width="2.2"
-                        stroke-linejoin="round" />
-                    <circle cx="14" cy="16" r="2.4" fill="#d4af37" />
-                    <circle cx="32" cy="10" r="2.6" fill="#d4af37" />
-                    <circle cx="50" cy="16" r="2.4" fill="#d4af37" />
-                    <line x1="8" y1="50" x2="56" y2="50" stroke="#d4af37" stroke-width="2.2" />
-                </svg>
-            </div>
+            <img class="event-logo" src="assets/logo.png" alt="Sangamam 2026 logo" onerror="this.style.display='none'">
             <h1 class="title">Sangamam 2026</h1>
             <p class="theme">REGALIA</p>
 
@@ -734,7 +768,7 @@
         // (see README.md). Until you do, the app just runs in local-only
         // mode on whichever device has it open.
         const FIREBASE_CONFIG = {
-            apiKey: "AIzaSyA8TJVNitEipVGere5P0y53oTqv9-Yqu8U",
+            aapiKey: "AIzaSyA8TJVNitEipVGere5P0y53oTqv9-Yqu8U",
             authDomain: "sangamam-2026-35eb2.firebaseapp.com",
             databaseURL: "https://sangamam-2026-35eb2-default-rtdb.asia-southeast1.firebasedatabase.app",
             projectId: "sangamam-2026-35eb2",
