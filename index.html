@@ -8,19 +8,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Marcellus&family=Playfair+Display:ital,wght@0,700;1,600;1,700&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg: #150c1b;
-            --bg-glow: #2c1a3a;
-            --panel: #221130;
-            --panel-2: #2c1522;
+            --bg: #14050b;
+            --bg-glow: #2c0915;
+            --panel: rgba(54, 10, 26, 0.82);
+            --panel-2: rgba(30, 4, 13, 0.90);
+            --maroon-dark: #1b030b;
+            --maroon-mid: #4a0d20;
+            --maroon-bright: #781432;
             --gold: #d4af37;
-            --gold-soft: #e9cf7d;
-            --ivory: #f3e9d0;
-            --muted: #b7a0c7;
-            --line: rgba(212, 175, 55, 0.35);
+            --gold-soft: #fae5a3;
+            --ivory: #fffaf0;
+            --muted: #dabfcb;
+            --line: rgba(212, 175, 55, 0.42);
             box-sizing: border-box;
             padding-top: env(safe-area-inset-top, 0px);
             padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -53,37 +56,87 @@
             padding: 44px 24px 100px;
         }
 
-        /* ---- Header / logo ---- */
+        /* ---- Header / crest ---- */
+        .crest {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        .crest svg {
+            width: 52px;
+            height: 52px;
+        }
+
+        /* ---- Header row: logo beside title/theme ---- */
+        .header-row {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 100px;
+        }
+
+        .event-logo-frame {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
         .event-logo {
             display: block;
-            max-width: 130px;
-            max-height: 130px;
-            width: auto;
-            height: auto;
-            margin: 0 auto 18px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-text {
+            text-align: center;
+            margin: 0 auto;
+            max-width: calc(100% - 100px);
+        }
+
+        .header-text h1.title,
+        .header-text p.theme {
+            text-align: center;
+            padding-left: 0;
         }
 
         h1.title {
-            font-family: 'Cinzel', serif;
+            font-family: 'Cinzel Decorative', serif;
             font-weight: 700;
-            font-size: clamp(28px, 6vw, 40px);
-            letter-spacing: 0.06em;
+            font-size: clamp(18px, 4.4vw, 28px);
+            letter-spacing: 0.05em;
+            white-space: nowrap;
             text-align: center;
             margin: 0;
             color: var(--gold-soft);
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85), 0 0 24px rgba(212, 175, 55, 0.4);
+            text-shadow: 0 0 18px rgba(212, 175, 55, 0.25);
         }
 
         p.theme {
-            font-family: 'Cinzel', serif;
-            font-weight: 600;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
             text-align: center;
-            letter-spacing: 0.32em;
-            font-size: 22px;
+            letter-spacing: 0.12em;
+            font-size: 19px;
             color: var(--gold-soft);
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85), 0 0 20px rgba(212, 175, 55, 0.4);
-            margin: 14px 0 0;
-            padding-left: 0.32em;
+            text-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+            margin: 5px 0 0;
+            padding-left: 0.12em;
             /* optical balance for letter-spacing */
         }
 
@@ -112,26 +165,26 @@
         /* ---- Spotlight ---- */
         .spotlight {
             position: relative;
-            background: linear-gradient(145deg, rgba(28, 14, 42, 0.62), rgba(15, 6, 25, 0.75));
-            backdrop-filter: blur(16px) saturate(140%);
-            -webkit-backdrop-filter: blur(16px) saturate(140%);
-            border: 1px solid rgba(212, 175, 55, 0.38);
+            background: linear-gradient(150deg, rgba(72, 12, 32, 0.84) 0%, rgba(35, 5, 15, 0.90) 55%, rgba(90, 16, 40, 0.82) 100%);
+            backdrop-filter: blur(14px) saturate(140%);
+            -webkit-backdrop-filter: blur(14px) saturate(140%);
+            border: 1px solid var(--line);
             border-radius: 12px;
             padding: 40px 28px 32px;
             text-align: center;
             overflow: hidden;
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.5),
-                0 0 30px rgba(212, 175, 55, 0.12),
-                inset 0 1px 1px rgba(255, 235, 175, 0.2),
-                inset 0 0 30px rgba(212, 175, 55, 0.05);
+            box-shadow:
+                0 20px 50px rgba(10, 2, 5, 0.72),
+                0 0 35px rgba(120, 18, 48, 0.4),
+                inset 0 0 25px rgba(140, 25, 58, 0.3),
+                inset 0 1px 1px rgba(255, 230, 140, 0.35);
         }
 
         .spotlight::before {
             content: "";
             position: absolute;
-            inset: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.25);
+            inset: 8px;
+            border: 1px solid rgba(233, 207, 125, 0.28);
             border-radius: 8px;
             pointer-events: none;
         }
@@ -139,34 +192,40 @@
         .spot-rank {
             font-family: 'Cinzel', serif;
             font-size: 16px;
-            letter-spacing: 0.25em;
-            color: var(--muted);
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            color: #e5cdb0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85), 0 0 10px rgba(60, 8, 22, 0.9);
             margin-bottom: 18px;
         }
 
         .spot-name {
             font-family: 'Cinzel', serif;
-            font-weight: 600;
+            font-weight: 700;
             font-size: clamp(24px, 5.5vw, 34px);
-            color: var(--ivory);
+            color: #ffffff;
             margin: 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 25px rgba(160, 25, 55, 0.65);
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .spot-points {
             font-size: clamp(58px, 15vw, 84px);
-            font-weight: 600;
-            color: var(--gold-soft);
+            font-weight: 700;
+            color: #ffe685;
             margin: 14px 0 4px;
             line-height: 1;
+            text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 175, 55, 0.45), 0 0 60px rgba(139, 28, 58, 0.35);
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .spot-points-label {
             font-family: 'Cinzel', serif;
             font-size: 11px;
-            letter-spacing: 0.3em;
-            color: var(--muted);
+            font-weight: 600;
+            letter-spacing: 0.32em;
+            color: #e5cdb0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
         }
 
         .fade-swap {
@@ -185,25 +244,20 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(212, 175, 55, 0.25);
-            transition: background 0.4s ease, transform 0.4s ease;
+            background: rgba(233, 207, 125, 0.3);
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+            transition: background 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .dot.active {
-            background: var(--gold);
-            transform: scale(1.3);
+            background: #ffd700;
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.9), 0 0 20px rgba(184, 15, 50, 0.8);
+            transform: scale(1.35);
         }
 
         /* ---- Standings ---- */
         .standings {
             margin-top: 44px;
-            background: rgba(22, 10, 32, 0.55);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 12px;
-            padding: 28px 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
 
         .standings h2 {
@@ -430,12 +484,12 @@
        below it for anyone who does scroll (e.g. checking on a laptop) */
         @media (min-width: 900px) {
             :root {
-                --bg: #241531;
-                --bg-glow: #402a4d;
-                --panel: #34203f;
-                --panel-2: #3d2436;
-                --muted: #c6b0d6;
-                --line: rgba(212, 175, 55, 0.4);
+                --bg: #1c0610;
+                --bg-glow: #380b1c;
+                --panel: rgba(62, 12, 30, 0.85);
+                --panel-2: rgba(36, 5, 16, 0.92);
+                --muted: #e0cad4;
+                --line: rgba(212, 175, 55, 0.45);
             }
 
             .wrap {
@@ -451,21 +505,46 @@
                 justify-content: center;
             }
 
-            .event-logo {
-                max-width: 180px;
-                max-height: 180px;
-                margin-bottom: 22px;
+            .crest svg {
+                width: 68px;
+                height: 68px;
+            }
+
+            .header-row {
+                position: relative;
+                min-height: 190px;
+            }
+
+            .event-logo-frame {
+                position: absolute;
+                left: -60px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 190px;
+                height: 190px;
+            }
+
+            .header-text {
+                text-align: center;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .header-text h1.title,
+            .header-text p.theme {
+                text-align: center;
             }
 
             h1.title {
-                font-size: clamp(42px, 4.5vw, 58px);
+                font-size: clamp(40px, 4.5vw, 60px);
+                white-space: nowrap;
             }
 
             p.theme {
                 font-size: 38px;
-                letter-spacing: 0.3em;
-                padding-left: 0.3em;
-                margin-top: 18px;
+                letter-spacing: 0.14em;
+                padding-left: 0.14em;
+                margin-top: 14px;
             }
 
             .divider svg {
@@ -541,12 +620,12 @@
 
         @media (min-width: 1400px) {
             :root {
-                --bg: #2b1a3a;
-                --bg-glow: #4d3159;
-                --panel: #3c2349;
-                --panel-2: #45283e;
-                --muted: #cfbcdd;
-                --line: rgba(212, 175, 55, 0.45);
+                --bg: #220713;
+                --bg-glow: #420d21;
+                --panel: rgba(70, 14, 34, 0.88);
+                --panel-2: rgba(40, 6, 18, 0.95);
+                --muted: #e4d0da;
+                --line: rgba(212, 175, 55, 0.5);
             }
 
             .wrap {
@@ -558,21 +637,31 @@
                 min-height: calc(100vh - 72px);
             }
 
-            .event-logo {
-                max-width: 230px;
-                max-height: 230px;
-                margin-bottom: 26px;
+            .crest svg {
+                width: 84px;
+                height: 84px;
+            }
+
+            .header-row {
+                min-height: 240px;
+            }
+
+            .event-logo-frame {
+                width: 240px;
+                height: 240px;
+                left: -80px;
             }
 
             h1.title {
-                font-size: clamp(58px, 4vw, 84px);
+                font-size: clamp(52px, 4vw, 84px);
+                white-space: nowrap;
             }
 
             p.theme {
-                font-size: 54px;
-                letter-spacing: 0.32em;
-                padding-left: 0.32em;
-                margin-top: 22px;
+                font-size: 52px;
+                letter-spacing: 0.14em;
+                padding-left: 0.14em;
+                margin-top: 18px;
             }
 
             .spotlight {
@@ -630,7 +719,12 @@
             }
         }
 
-        /* ---- Background video ---- */
+        /* ---- Background video ----
+     Off by default (no video files present, harmless if none load —
+     the page just shows the plain background as before). Drop files
+     at assets/background-landscape.mp4 and assets/background-portrait.mp4
+     to turn it on; the right one loads automatically based on the
+     screen's aspect ratio. See README.md. */
         .bg-video {
             position: fixed;
             inset: 0;
@@ -638,13 +732,12 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
-            filter: brightness(1.35) contrast(1.08);
         }
 
         .bg-scrim {
             position: fixed;
             inset: 0;
-            background: linear-gradient(180deg, rgba(16, 8, 24, 0.30), rgba(16, 8, 24, 0.45));
+            background: linear-gradient(180deg, rgba(24, 6, 14, 0.65), rgba(15, 4, 9, 0.82));
             z-index: -1;
         }
 
@@ -658,16 +751,33 @@
 
 <body>
 
-    <video class="bg-video" autoplay muted loop playsinline webkit-playsinline poster="assets/background-poster.jpg">
-        <source src="assets/background.mp4" type="video/mp4">
-    </video>
+    <video class="bg-video" id="bgVideo" autoplay muted loop playsinline webkit-playsinline
+        poster="assets/background-poster.jpg"></video>
     <div class="bg-scrim"></div>
 
     <div class="wrap">
         <div class="hero">
-            <img class="event-logo" src="assets/logo.png" alt="Sangamam 2026 logo" onerror="this.style.display='none'">
-            <h1 class="title">Sangamam 2026</h1>
-            <p class="theme">REGALIA</p>
+            <div class="crest">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 46L14 20L24 32L32 14L40 32L50 20L56 46H8Z" stroke="#d4af37" stroke-width="2.2"
+                        stroke-linejoin="round" />
+                    <circle cx="14" cy="16" r="2.4" fill="#d4af37" />
+                    <circle cx="32" cy="10" r="2.6" fill="#d4af37" />
+                    <circle cx="50" cy="16" r="2.4" fill="#d4af37" />
+                    <line x1="8" y1="50" x2="56" y2="50" stroke="#d4af37" stroke-width="2.2" />
+                </svg>
+            </div>
+
+            <div class="header-row">
+                <div class="event-logo-frame">
+                    <img class="event-logo" src="assets/logo.png" alt="Sangamam 2026 logo"
+                        onerror="this.closest('.event-logo-frame').style.display='none'">
+                </div>
+                <div class="header-text">
+                    <h1 class="title">Sangamam 2026</h1>
+                    <p class="theme">REGALIA</p>
+                </div>
+            </div>
 
             <div class="divider">
                 <svg viewBox="0 0 24 24" fill="#d4af37">
@@ -735,6 +845,24 @@
         const STORAGE_KEY = "sangamam2026_scores";
         const ROTATE_MS = 4500;
 
+        // ---- Background video: pick the file matching this screen's shape ----
+        // Wide/landscape displays (16:9 etc.) load background-landscape.mp4;
+        // tall/portrait displays (9:16 etc.) load background-portrait.mp4.
+        // If a file doesn't exist, the video element just stays empty and
+        // the plain background shows through — nothing breaks.
+        (function loadBackgroundVideo() {
+            const video = document.getElementById('bgVideo');
+            if (!video) return;
+            const isLandscape = window.innerWidth >= window.innerHeight;
+            const file = isLandscape ? 'assets/background-landscape.mp4' : 'assets/background-portrait.mp4';
+            const source = document.createElement('source');
+            source.src = file;
+            source.type = 'video/mp4';
+            video.appendChild(source);
+            video.load();
+            video.play().catch(() => { /* autoplay blocked; poster/background still shows */ });
+        })();
+
         const defaultTeams = [
             { name: "Team Aurelia", points: 0 },
             { name: "Team Solstice", points: 0 },
@@ -768,7 +896,7 @@
         // (see README.md). Until you do, the app just runs in local-only
         // mode on whichever device has it open.
         const FIREBASE_CONFIG = {
-            aapiKey: "AIzaSyA8TJVNitEipVGere5P0y53oTqv9-Yqu8U",
+            apiKey: "AIzaSyA8TJVNitEipVGere5P0y53oTqv9-Yqu8U",
             authDomain: "sangamam-2026-35eb2.firebaseapp.com",
             databaseURL: "https://sangamam-2026-35eb2-default-rtdb.asia-southeast1.firebasedatabase.app",
             projectId: "sangamam-2026-35eb2",
